@@ -6,6 +6,12 @@ const sqlite = require("sqlite");
 const version = "V2.1.2"
 const logs = '595315793743577088';
 const {RichEmbed} = require("discord.js");
+const fs = require("fs");
+const active = new Map();
+const Enmap = require("enmap");
+const request = require('request')
+const https = require('https');
+const async = require("async");
 
 app.use(express.static('public'))
 app.get("/", (request, response) => {
@@ -60,7 +66,39 @@ client.on("guildMemberAdd", async member => {
   if(member.guild.id == "626382608703684620"){
     member.guild.channels.get(c=>c.name == "welcome").send(joinEmbed)
   }
+  
+
+	request.post(`https://iloot.it/Beta/api/dominiks/globanned.php?USER=${member.id}`, {
+		json: {
+		  todo: 'Buy the milk'
+		}
+	  }, (error, res, body) => {
+		if (error) {
+		  return
+		}
+		let ban = (body.banned)
+		let reason = (body.reason)
+		let unbanid = (body.Unban_id)
+    let banEmbed = new RichEmbed()
+    .setTitle("Globanned")
+    .setDescription(`${member.user.tag} (${member.user.id}) has been globally banned for **${reason}**`)
+    .setFooter(`If you feel this was a mistake, please contact ${client.users.get(client.owner).tag} quoting "Unban ID: ${unbanid}"`)
+        
+		if(ban == "true") {
+		member.send(banEmbed)
+		member.kick(`HoundBot Protection`);
+	console.log(`ModBot protection user was globaned and try to rejoin ${client.users.get(member.id).tag}`)
+
+	} else {  
+	console.log(`${client.users.get(member.id).tag} Is Safe!`)
+	}
+
+})
+  
+  
+  
 });
+
 client.on("guildMemberRemove", member => {
   let leaveEmbed = new RichEmbed()
   .setTitle("Goodbye!")
