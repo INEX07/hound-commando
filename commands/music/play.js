@@ -43,7 +43,7 @@ module.exports = class play extends Command {
         await handleVideo(video2, message, voiceChannel, true);
       }
       return message.channel.send(
-        `✅ Playlist: **${playlist.title}** has been added to the queue!`
+        `Playlist: **${playlist.title}** has been added to the queue!`
       );
     } else {
       try {
@@ -81,7 +81,7 @@ Please provide a value to select one of the search results ranging from 1-10.
         } catch (err) {
           console.error(err);
           return message.channel.send(
-            "🆘 I could not obtain any search results."
+            "I could not obtain any search results."
           );
         }
       }
