@@ -17,7 +17,7 @@ module.exports = class avatar extends Command {
     run(message) {
       const args = message.content.slice(avatar.length).split(" ")
       if(args[1]){
-      let user = this.client.users.get(args[1]) || message.mentions.users.first()
+      let user = this.client.users.fetch(args[1]) || message.mentions.users.first()
         const embed = new Discord.MessageEmbed()
             .setTitle(user.tag)
             .setImage(user.displayAvatarURL())
