@@ -1,6 +1,9 @@
 # hound-commando
 Use this to suggest any possible new features or any bugs or errors in the bot
 
+# Current Stats
+![Discord Bot List stats](https://discordbotlist.com/bots/575025796192796684/widget)
+
 Issues
 ------
 If you have found any issues within the bot, please create a new issue on this github (Using the bug report template), labelling it appropriately (e.g: as a "bug")
