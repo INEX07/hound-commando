@@ -256,7 +256,8 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
       connection: null,
       songs: [],
       volume: 5,
-      playing: true
+      playing: true,
+      loop: false
     };
     queue.set(msg.guild.id, queueConstruct);
 
@@ -300,6 +301,8 @@ function play(guild, song) {
         console.log("Song ended.");
       else console.log(reason);
       serverQueue.songs.shift();
+      if (serverQueue.loop === true) serverQueue.songs.push(serverQueue.songs.shift());
+      else serverQueue.songs.shift();
       play(guild, serverQueue.songs[0]);
     })
     .on("error", error => console.error(error));
